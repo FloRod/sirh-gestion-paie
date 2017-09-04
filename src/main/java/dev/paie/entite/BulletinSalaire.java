@@ -2,6 +2,9 @@ package dev.paie.entite;
 
 import java.math.BigDecimal;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class BulletinSalaire {
 	
 	private Integer id;
