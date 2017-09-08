@@ -2,14 +2,34 @@ package dev.paie.entite;
 
 import java.math.BigDecimal;
 
-import org.springframework.stereotype.Component;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-@Component
+//import org.springframework.stereotype.Component;
+
+@Entity
+@Table(name="GRADES")
 public class Grade {
 	
+	/** id : Integer */
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
+	
+	/** code : String */
+	@Column(name="CODE")
 	private String code;
+	
+	/** nbHeuresBase : BigDecimal */
+	@Column(name="NB_HEURES_BASE")
 	private BigDecimal nbHeuresBase;
+	
+	/** tauxBase : BigDecimal */
+	@Column(name="TAUX_BASE")
 	private BigDecimal tauxBase;
 	
 	public String getCode() {

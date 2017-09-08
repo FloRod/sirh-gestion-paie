@@ -14,11 +14,12 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import dev.paie.config.ServicesConfig;
 import dev.paie.entite.Grade;
 import dev.paie.spring.DataSourceMySQLConfig;
 
 //Sélection des classes de configuration Spring à utiliser lors du test
-@ContextConfiguration(classes = { DataSourceMySQLConfig.class })
+@ContextConfiguration(classes = { DataSourceMySQLConfig.class, ServicesConfig.class })
 // Configuration JUnit pour que Spring prenne la main sur le cycle de vie du
 // test
 @RunWith(SpringRunner.class)
@@ -26,6 +27,9 @@ public class GradeServiceJdbcTemplateTest {
 
 	@Autowired
 	private GradeService gradeService;
+	
+	// à priori un objet métier. Dans le cadre du TP, plutôt pas mal pour les tests  MAIS mauvaises pratiques autrement
+	// créer les objets métiers avec l'opérateur new !
 	@Autowired
 	private Grade nouveauGrade;
 	
