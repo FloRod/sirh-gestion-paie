@@ -12,8 +12,8 @@ import dev.paie.service.InitialiserDonneesService;
 @Controller
 public class StartUpController {
 	
-	@Autowired
-	private InitialiserDonneesService initService;
+//	@Autowired
+//	private InitialiserDonneesService initService;
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(StartUpController.class);
 	
@@ -24,7 +24,7 @@ public class StartUpController {
 		LOGGER.info("Initialisation des données");
 		System.out.println("ça marcche !!!!!!!!!!!!!!!!!!!!!!!!!");
 		
-		initService.initialiser();
+//		initService.initialiser();
 	}
 
 }

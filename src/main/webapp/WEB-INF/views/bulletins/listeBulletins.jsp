@@ -7,17 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-<form>
-	Matricule : <input type="text" name="matricule">
-</form>
-
-<select>
-  <option value="volvo">Volvo</option>
-  <option value="saab">Saab</option>
-  <option value="opel">Opel</option>
-  <option value="audi">Audi</option>
-</select>
+<li><a href ="/paie">Retour Accueil</a></li>
+<h1>Liste des bulletins de salaire</h1>
 
 </body>
 </html>

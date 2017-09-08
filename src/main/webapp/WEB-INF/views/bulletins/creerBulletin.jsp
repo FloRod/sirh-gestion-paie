@@ -6,33 +6,27 @@
 <head>
 <meta charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
-<title>Ajouter un employé</title>
+<title>Insert title here</title>
 </head>
 <body>
+<<a href ="/paie">Retour Accueil</a>
+<h1>Créer un bulletin de salaire</h1>
 
-	<a href="/paie">Retour Accueil</a>
-	<h1>Ajouter un employé</h1>
-
-	<form action = <%=request.getContextPath()%>/mvc/employes/validerForm method="post">
-		<p>Matricule : <input type="text" name="matricule"></p>
-		
-		<p>Entreprise : <select name = "entrepriseId">
-			<c:forEach var="entreprise" items="${listeEntreprises}">
-				<option value="${entreprise.id}">${entreprise.denomination}</option>
+<form action = <%=request.getContextPath()%>/mvc/bulletins/valider method="post">
+		<p>Période : <select name = "periodeId">
+			<c:forEach var="periode" items="${listePeriodes}">
+				<option value="${periode.id}">${periode.dateDebut} - ${periode.dateFin}</option>
 			</c:forEach>
 		</select></p>
 		
-		<p>Profil : <select name = "profilId">
-			<c:forEach var="profil" items="${listeProfils}">
-				<option value="${profil.id}">${profil.code}</option>
+		<p>Matricule : <select name = "employeId">
+			<c:forEach var="employe" items="${listeEmployes}">
+				<option value="${employe.id}">${employe.matricule}</option>
 			</c:forEach>
 		</select></p>
 		
-		<p>Grade : <select name = "gradeId">
-			<c:forEach var="grade" items="${listeGrades}">
-				<option value="${grade.id}">${grade.code}</option>
-			</c:forEach>
-		</select></p>
+		<p>Prime Exceptionnelle : <input type="text" name="prime"></p>
+		
 		<button class="btn-primary" type="submit">Valider</button>
 	</form>
 

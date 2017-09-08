@@ -68,4 +68,18 @@ public class BulletinSalaire {
 		this.id = id;
 	}
 
+	/**
+	 * @return the dateCreation
+	 */
+	public LocalDateTime getDateCreation() {
+		return dateCreation;
+	}
+
+	/**
+	 * @param dateCreation the dateCreation to set
+	 */
+	public void setDateCreation(LocalDateTime dateCreation) {
+		this.dateCreation = dateCreation;
+	}
+
 }
