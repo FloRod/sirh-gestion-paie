@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset=UTF-8">
+<meta charset="UTF-8">
 <link rel="stylesheet" type="text/css"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
 <title>Liste des bulletins de salaire</title>
@@ -18,12 +18,18 @@
 			<th>Date/heure création</th>
 			<th>Période</th>
 			<th>Matricule</th>
+			<th>Salaire brut</th>
+			<th>Net Imposable</th>
+			<th>Net à payer</th>
 		</tr>
-		<c:forEach var="bulletin" items="${listeResultatBulletins}">
+		<c:forEach var="bulletin" items="${listeBulletins}">
 			<tr>
 				<td>${bulletin.dateCreation}</td>
 				<td>${bulletin.periode.dateDebut} / ${bulletin.periode.dateFin}</td>
 				<td>${bulletin.remunerationEmploye.matricule}</td>
+				<td>${bulletin.resultatCalculRemuneration.salaireBrut}</td>
+				<td>${bulletin.resultatCalculRemuneration.netImposable}</td>
+				<td>${bulletin.resultatCalculRemuneration.netAPayer}</td>
 			</tr>
 		</c:forEach>
 	</table>

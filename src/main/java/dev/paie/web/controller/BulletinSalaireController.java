@@ -9,17 +9,18 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import dev.paie.entite.BulletinSalaire;
-import dev.paie.entite.ResultatCalculRemuneration;
 import dev.paie.repository.BulletinSalaireRepository;
 import dev.paie.repository.PeriodeRepository;
 import dev.paie.repository.RemunerationEmployeRepository;
 import dev.paie.service.CalculerRemunerationServiceSimple;
 
+@Transactional
 @Controller
 @RequestMapping("/bulletins")
 public class BulletinSalaireController {
@@ -34,11 +35,7 @@ public class BulletinSalaireController {
 	BulletinSalaireRepository bulletinSalaireRepository;
 	
 	@Autowired
-	ResultatCalculRemuneration resultatCalculRemuneration;
-	
-	@Autowired
 	CalculerRemunerationServiceSimple calculerRemunerationServiceSimple;
-	
 	
 	
 	@RequestMapping(method = RequestMethod.GET, path = "/create")
@@ -70,13 +67,12 @@ public class BulletinSalaireController {
 	public ModelAndView listeBulletin() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("bulletins/listeBulletins");
-//		List<BulletinSalaire> tabBulletin = bulletinSalaireRepository.findAll();
-//		List<ResultatCalculRemuneration> tabResultat = new ArrayList<ResultatCalculRemuneration>();
-//		for(BulletinSalaire bulletin : tabBulletin){
-//			resultatCalculRemuneration = calculerRemunerationServiceSimple.calculer(bulletin);
-//			tabResultat.add(resultatCalculRemuneration);
-//		}
-		mv.addObject("listeResultatBulletins", bulletinSalaireRepository.findAll());
+		List<BulletinSalaire> tabBulletins = new ArrayList<BulletinSalaire>();
+		for(BulletinSalaire bulletin : bulletinSalaireRepository.findAll()){
+			bulletin.setResultatCalculRemuneration(calculerRemunerationServiceSimple.calculer(bulletin));
+			tabBulletins.add(bulletin);
+		}
+		mv.addObject("listeBulletins", tabBulletins);
 		return mv;
 	}
 

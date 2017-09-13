@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 //import org.springframework.stereotype.Component;
 
@@ -35,6 +36,23 @@ public class BulletinSalaire {
 	
 	@Column(name="DATE_CREATION")
 	private LocalDateTime dateCreation;
+	
+	@Transient
+	private ResultatCalculRemuneration resultatCalculRemuneration;
+
+	/**
+	 * @return the resultatCalculRemuneration
+	 */
+	public ResultatCalculRemuneration getResultatCalculRemuneration() {
+		return resultatCalculRemuneration;
+	}
+
+	/**
+	 * @param resultatCalculRemuneration the resultatCalculRemuneration to set
+	 */
+	public void setResultatCalculRemuneration(ResultatCalculRemuneration resultatCalculRemuneration) {
+		this.resultatCalculRemuneration = resultatCalculRemuneration;
+	}
 
 	public RemunerationEmploye getRemunerationEmploye() {
 		return remunerationEmploye;
