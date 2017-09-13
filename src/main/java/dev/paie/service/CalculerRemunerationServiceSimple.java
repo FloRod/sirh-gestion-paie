@@ -1,10 +1,7 @@
 package dev.paie.service;
 
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.function.BiFunction;
 import java.util.function.BinaryOperator;
-import java.util.function.Function;
 import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;

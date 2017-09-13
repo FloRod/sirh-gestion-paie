@@ -19,7 +19,7 @@
 			<th>Période</th>
 			<th>Matricule</th>
 		</tr>
-		<c:forEach var="bulletin" items="${listeBulletins}">
+		<c:forEach var="bulletin" items="${listeResultatBulletins}">
 			<tr>
 				<td>${bulletin.dateCreation}</td>
 				<td>${bulletin.periode.dateDebut} / ${bulletin.periode.dateFin}</td>
