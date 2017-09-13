@@ -2,6 +2,9 @@ package dev.paie.web.controller;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,12 +17,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import dev.paie.entite.BulletinSalaire;
 import dev.paie.entite.RemunerationEmploye;
+import dev.paie.entite.ResultatCalculRemuneration;
 import dev.paie.repository.BulletinSalaireRepository;
 import dev.paie.repository.EntrepriseRepository;
 import dev.paie.repository.GradeRepository;
 import dev.paie.repository.PeriodeRepository;
 import dev.paie.repository.ProfilRemunerationRepository;
 import dev.paie.repository.RemunerationEmployeRepository;
+import dev.paie.service.CalculerRemunerationServiceSimple;
 
 @Controller
 @RequestMapping({ "/employes", "/bulletins" })
@@ -42,6 +47,12 @@ public class RemunerationEmployeController {
 	
 	@Autowired
 	BulletinSalaireRepository bulletinSalaireRepository;
+	
+	@Autowired
+	ResultatCalculRemuneration resultatCalculRemuneration;
+	
+	@Autowired
+	CalculerRemunerationServiceSimple calculerRemunerationServiceSimple;
 
 	@RequestMapping(method = RequestMethod.GET, path = "/creer")
 	public ModelAndView creerEmploye() {
@@ -94,6 +105,7 @@ public class RemunerationEmployeController {
 		bulletin.setPeriode(periodeRepository.findOne(Integer.parseInt(request.getParameter("periodeId"))));
 		bulletin.setRemunerationEmploye(remunerationEmployeRepository.findOne(Integer.parseInt(request.getParameter("employeId"))));
 		bulletin.setPrimeExceptionnelle(new BigDecimal(request.getParameter("prime")));
+		//String date = LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
 		bulletin.setDateCreation(LocalDateTime.now());
 		
 		bulletinSalaireRepository.save(bulletin);
@@ -104,7 +116,13 @@ public class RemunerationEmployeController {
 	public ModelAndView listeBulletin() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("bulletins/listeBulletins");
-		// mv.addObject("prefixMatricule", "M00");
+		List<BulletinSalaire> tabBulletin = bulletinSalaireRepository.findAll();
+		List<ResultatCalculRemuneration> tabResultat = new ArrayList<ResultatCalculRemuneration>();
+		for(BulletinSalaire bulletin : tabBulletin){
+			resultatCalculRemuneration = calculerRemunerationServiceSimple.calculer(bulletin);
+			tabResultat.add(resultatCalculRemuneration);
+		}
+		mv.addObject("listeResultatBulletins", tabResultat);
 		return mv;
 	}
 
